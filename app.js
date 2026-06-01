@@ -1,7 +1,6 @@
 const db = require("./database/db");
 const seedDatabase = require("./database/seed");
 
-// Красивий вивід одного запису
 function printCD(cd) {
 
     console.log(`
@@ -14,7 +13,6 @@ function printCD(cd) {
 `);
 }
 
-// Виведення всіх компакт-дисків
 function showAllCDs() {
 
     const cds = db.prepare(`
@@ -28,7 +26,6 @@ function showAllCDs() {
     });
 }
 
-// Сортування за датою запису
 function sortByRecordDate() {
 
     const cds = db.prepare(`
@@ -43,7 +40,6 @@ function sortByRecordDate() {
     });
 }
 
-// Пошук за назвою альбому
 function findByAlbum(albumTitle) {
 
     const cds = db.prepare(`
@@ -65,19 +61,14 @@ function findByAlbum(albumTitle) {
     }
 }
 
-// Головна функція
 async function main() {
 
-    // Автоматичне заповнення БД при першому запуску
     await seedDatabase(db);
 
-    // Виведення всіх записів
     showAllCDs();
 
-    // Сортування
     sortByRecordDate();
 
-    // Пошук
     findByAlbum("Meteora");
 }
 
