@@ -3,14 +3,26 @@ const seedDatabase = require("./database/seed");
 
 function printCD(cd) {
 
-    console.log(`
-Інвентарний номер : ${cd.inventory_number}
-Назва альбому     : ${cd.album_title}
-Об'єм диску       : ${cd.disk_size} MB
-Тип диску         : ${cd.disk_type}
-Дата запису       : ${cd.record_date}
-----------------------------------------
-`);
+    const fields = {
+        "Інвентарний номер": cd.inventory_number,
+        "Назва альбому": cd.album_title,
+        "Об'єм диску": `${cd.disk_size} MB`,
+        "Тип диску": cd.disk_type,
+        "Дата запису": cd.record_date
+    };
+
+    const maxLength = Math.max(
+        ...Object.keys(fields).map(key => key.length)
+    );
+
+    for (const [key, value] of Object.entries(fields)) {
+
+        console.log(
+            `${key.padEnd(maxLength)} : ${value}`
+        );
+    }
+
+    console.log("----------------------------------------");
 }
 
 function showAllCDs() {
